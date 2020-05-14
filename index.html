@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="Es-es">
+<head>
+<title>Generador Cross-Browser de QR</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/130527/qrcode.js'></script>
+<style>
+.qr-code-generator {
+	margin: 0 auto;
+	border: 5px solid #305b87;
+    padding: 20px;
+    height: auto;
+}
+
+.qr-code-generator * {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#qrcode {
+	width: 128px;
+	height: 128px;
+	margin: 0 auto;
+	text-align: center;
+	padding: 10px 0px 0px 0px;
+}
+
+#qrcode a {
+	font-size: 0.8em;
+}
+
+.qr-url, .qr-size {
+	padding: 0.5em;
+	border: 1px solid #ddd;
+	border-radius: 2px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.qr-url {
+	width: 50%;
+}
+.qr-size {
+	width: 20%;
+}
+.generate-qr-code, .clear-qr{
+	display: block;
+	width: 100%;
+	margin: 0.5em 0 0;
+	padding: 0.25em;
+	font-size: 1.2em;
+	border: none;
+	cursor: pointer;
+	background-color: #2d5c84;
+	color: #fff;
+}
+.generate-qr-code:hover, .clear-qr:hover{
+	background-color: #4e9fe5;
+}
+@media only screen and (max-width: 600px) {
+	canvas {
+		width: 128px !important;
+		height: auto !important;
+	}
+	#qrcode{
+		width: 128px !important;
+		height: auto !important;
+	}
+}
+</style>
+</head>
+<body>
+<div class="qr-code-generator">
+	<input type="text" class="qr-url" placeholder="URL o Texto">
+	<input type="number" class="qr-size" value="128" min="20" max="500">
+	<button class="generate-qr-code">Crear QR</button><button class="clear-qr">Limpiar</button>
+	<div id="qrcode"></div>
+</div>
+<script stype="text/Javascript">
+$(document).ready(function(){
+    $('.qr-code-generator').keypress(function(e){
+      if(e.keyCode==13)
+      	$('.generate-qr-code').click();
+    });
+    $('.clear-qr').on('click', function(){
+    	$('#qrcode').empty();
+
+	 $('.qr-code-generator').animate({
+	        height: "auto"
+	    }, 200 );
+
+    });
+});
+
+$('.generate-qr-code').on('click', function(){
+	// Clear Previous QR Code
+	$('#qrcode').empty();
+	// Set Size to Match User Input
+	$('#qrcode').css({
+	'width' : $('.qr-size').val(),
+	'height' : $('.qr-size').val()
+})
+// Generate and Output QR Code
+$('#qrcode').qrcode({width: $('.qr-size').val(),height: $('.qr-size').val(),text: $('.qr-url').val()});
+});
+</script>
+</body>
