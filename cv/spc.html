@@ -2,8 +2,22 @@
 <html>
 	<head>
 		<title>CV Sergio Parada</title>
+		<meta name="robots" content="noindex">
+		<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 	</head>
 	<body>
     	<iframe src="https://drive.google.com/file/d/1p97dEUcIKT6KHNfR3QNe0_7ME9nXxpHZ/preview" width="100%" height="480"></iframe>
+    	<div id="recomendaciones">
+    	</div>
+    <script>
+    	$.ajax({
+    	url:'http://www.corsproxy.com/' +
+        'linkedin.com/in/sergioparadac',
+        type:'GET',
+        success: function(data){
+           $('#recomendaciones').html($(data).find('.recommendations').html());
+        	}
+		});
+    </script>
 	</body>
 </html>
