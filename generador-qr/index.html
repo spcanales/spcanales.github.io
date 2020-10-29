@@ -101,7 +101,7 @@
 
 
 <div id="sociales" class="sociales">
-<iframe src="https://www.facebook.com/plugins/like.php?href=http://www.qrcode.cl&amp;layout=button_count&amp;show_faces=true&amp;width=100&amp;action=like&amp;font=arial&amp;colorscheme=light" style="margin-bottom:10px; border:none; overflow:hidden; width:100px; height:20px"></iframe>
+<iframe src="https://www.facebook.com/plugins/like.php?href=https://spcanales.github.io/generador-qr/&amp;layout=button_count&amp;show_faces=true&amp;width=100&amp;action=like&amp;font=arial&amp;colorscheme=light" style="margin-bottom:10px; border:none; overflow:hidden; width:100px; height:20px"></iframe>
 <p style="font-size:12px;">2020 realizado por <a href="http://www.twitter.com/sp001" title="Sigueme en Twitter" >sp001</a>, muestra tu apoyo presionando "Me gusta".</p>
 </div>
 
@@ -118,9 +118,9 @@ $(document).ready(function(){
         'width' : '0',
         'height' : '0'});
 
-  $('.qr-code-generator').animate({
-          height: "auto"
-      }, 200 );
+    $('.qr-code-generator').animate({
+            height: "auto"
+        }, 200 );
 
     });
 });
@@ -132,24 +132,23 @@ $('.generate-qr-code').on('click', function(){
   $('#qrcode').css({
   'width' : $('.qr-size').val(),
   'height' : $('.qr-size').val()
-})
+  })
 
-// Generate and Output QR Code
-var qrcode = new QRCode({
-  content: $('.qr-url').val(),
-  padding: 4,
-  width: $('.qr-size').val(),
-  height: $('.qr-size').val(),
-  color: "#000000",
-  background: "#ffffff",
-  ecl: "M",
+  // Generate and Output QR Code
+  var qrcode = new QRCode({
+    content: $('.qr-url').val(),
+    padding: 4,
+    width: $('.qr-size').val(),
+    height: $('.qr-size').val(),
+    color: "#000000",
+    background: "#ffffff",
+    ecl: "M",
+  });
+
+
+  var svg = qrcode.svg();
+  document.getElementById("qrcode").innerHTML = svg;
 });
-
-
-var svg = qrcode.svg();
-document.getElementById("qrcode").innerHTML = svg;
-}
-);
 
 function download(){
   if ($('#qrcode').is(':empty'))
