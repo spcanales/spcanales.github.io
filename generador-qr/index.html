@@ -6,71 +6,76 @@
 <meta name="description" content="Un simple generador de QR">
 <meta name="keywords" content="generador, qr, crear">
 <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+<script src="./qrcode.js"></script>
 <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/130527/qrcode.js'></script>
 <style>
 .qr-code-generator {
-	margin: 0 auto;
-	border: 5px solid #305b87;
+  margin: 0 auto;
+  border: 5px solid #305b87;
     padding: 20px;
     height: auto;
 }
 
 .qr-code-generator * {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 #qrcode {
-	width: 128px;
-	height: 128px;
-	margin: 0 auto;
-	text-align: center;
-	padding: 10px 0px 0px 0px;
+  /*width: 128px;
+  height: 128px;*/
+  margin: 0 auto;
+  text-align: center;
+  padding: 0px 0px 0px 0px;
 }
 
 #qrcode a {
-	font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 .qr-url, .qr-size {
-	padding: 0.5em;
-	border: 1px solid #ddd;
-	border-radius: 2px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+  padding: 0.5em;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 .qr-url {
-	width: 50%;
+  width: 50%;
 }
 .qr-size {
-	width: 20%;
+  width: 20%;
 }
-.generate-qr-code, .clear-qr{
-	display: block;
-	width: 100%;
-	margin: 0.5em 0 0;
-	padding: 0.25em;
-	font-size: 1.2em;
-	border: none;
-	cursor: pointer;
-	background-color: #2d5c84;
-	color: #fff;
+.generate-qr-code, .clear-qr, .download-qr-code{
+  display: block;
+  width: 100%;
+  margin: 0.5em 0 0;
+  padding: 0.25em;
+  font-size: 1.2em;
+  border: none;
+  cursor: pointer;
+  background-color: #2d5c84;
+  color: #fff;
+}
+.sociales{
+  padding: 10px 0px 0px 0px;
+  text-align: center;
+  font-family: system-ui;
 }
 .generate-qr-code:hover, .clear-qr:hover{
-	background-color: #4e9fe5;
+  background-color: #4e9fe5;
 }
 @media only screen and (max-width: 600px) {
-	canvas {
-		width: 128px !important;
-		height: auto !important;
-	}
-	#qrcode{
-		width: 128px !important;
-		height: auto !important;
-	}
+  canvas {
+    width: 128px !important;
+    height: auto !important;
+  }
+  #qrcode{
+    width: 128px !important;
+    height: auto !important;
+  }
 }
 </style>
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -85,38 +90,81 @@
 </head>
 <body>
 <div class="qr-code-generator">
-	<input type="text" class="qr-url" placeholder="URL o Texto">
-	<input type="number" class="qr-size" value="128" min="20" max="500">
-	<button class="generate-qr-code">Crear QR</button><button class="clear-qr">Limpiar</button>
-	<div id="qrcode"></div>
+  <input type="text" class="qr-url" placeholder="URL o Texto">
+  <input type="number" class="qr-size" value="128" min="20" max="500">
+  <button class="generate-qr-code">Crear QR</button><button class="clear-qr">Limpiar</button>
+  <div id="qrcode"></div>
+
+<button class="download-qr-code" onclick="download()">Descargar SVG</button>
 </div>
+
+
+
+<div id="sociales" class="sociales">
+<iframe src="https://www.facebook.com/plugins/like.php?href=http://www.qrcode.cl&amp;layout=button_count&amp;show_faces=true&amp;width=100&amp;action=like&amp;font=arial&amp;colorscheme=light" style="margin-bottom:10px; border:none; overflow:hidden; width:100px; height:20px"></iframe>
+<p style="font-size:12px;">2020 realizado por <a href="http://www.twitter.com/sp001" title="Sigueme en Twitter" >sp001</a>, muestra tu apoyo presionando "Me gusta".</p>
+</div>
+
 <script stype="text/Javascript">
 $(document).ready(function(){
     $('.qr-code-generator').keypress(function(e){
       if(e.keyCode==13)
-      	$('.generate-qr-code').click();
+        $('.generate-qr-code').click();
     });
     $('.clear-qr').on('click', function(){
-    	$('#qrcode').empty();
-    	$('.qr-url').val('');
+      $('#qrcode').empty();
+      $('.qr-url').val('');
+      $('#qrcode').css({
+        'width' : '0',
+        'height' : '0'});
 
-	$('.qr-code-generator').animate({
-	        height: "auto"
-	    }, 200 );
+  $('.qr-code-generator').animate({
+          height: "auto"
+      }, 200 );
 
     });
 });
 
 $('.generate-qr-code').on('click', function(){
-	// Clear Previous QR Code
-	$('#qrcode').empty();
-	// Set Size to Match User Input
-	$('#qrcode').css({
-	'width' : $('.qr-size').val(),
-	'height' : $('.qr-size').val()
+  // Clear Previous QR Code
+  $('#qrcode').empty();
+  // Set Size to Match User Input
+  $('#qrcode').css({
+  'width' : $('.qr-size').val(),
+  'height' : $('.qr-size').val()
 })
+
 // Generate and Output QR Code
-$('#qrcode').qrcode({width: $('.qr-size').val(),height: $('.qr-size').val(),text: $('.qr-url').val()});
+var qrcode = new QRCode({
+  content: $('.qr-url').val(),
+  padding: 4,
+  width: $('.qr-size').val(),
+  height: $('.qr-size').val(),
+  color: "#000000",
+  background: "#ffffff",
+  ecl: "M",
 });
+
+
+var svg = qrcode.svg();
+document.getElementById("qrcode").innerHTML = svg;
+}
+);
+
+function download(){
+  if ($('#qrcode').is(':empty'))
+    alert('Nada para descargar');
+  else {
+  var svgData = $("#qrcode")[0].outerHTML;
+  var svgBlob = new Blob([svgData], {type:"image/svg+xml;charset=utf-8"});
+  var svgUrl = URL.createObjectURL(svgBlob);
+  var downloadLink = document.createElement("a");
+  downloadLink.href = svgUrl;
+  downloadLink.download = $('.qr-url').val()+"_qr.svg";
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+  }
+};
 </script>
 </body>
