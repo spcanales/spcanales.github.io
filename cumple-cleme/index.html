@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <style>
+          .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            z-index: -1;
+          }
+
+          .bg-video #player {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+          }
+
+          .bg-video .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+          }
+          h1 {
+            color: white;
+            text-align: center;
+            margin-top: 5vh;
+            font-size: 42px;
+            text-shadow: 1px 1px 3px black;
+            font-family: sans-serif;
+          }
+          a {
+            color: #04fff0;
+            text-decoration: none;
+          }
+          .info-cumple {
+            font-family: "Cookie", sans-serif;
+            color: white;
+            text-align: center;
+            font-size: 32px;
+            text-shadow: 1px 1px 3px black;
+            background: #00000030;
+            border-radius: 10px;
+          }
+          .material-icons {
+            color:chartreuse;
+          }
+        </style>
+        <title>Cumple Clemente</title>
+</head>
+<body>
+  <div class="bg-video">
+    <div class="overlay"></div>
+    <div id="player"></div>
+  </div>
+
+  <h1>CUMPLEAÑOS DE CLEMENTE</h1>
+  <div class="info-cumple">Este sábado 25 de septiembre, estas invitado al cumpleaños de Clemente
+    <br />
+    <br /><i class="material-icons">location_on</i> <b>Donde:</b> Tarragona Sur 2162, Valle Noble. Concepción.
+    <br /><i class="material-icons">drive_eta</i> <a href="https://www.google.com/maps/dir//C.+Tarragona+Sur+2162,+Concepci%C3%B3n,+B%C3%ADo+B%C3%ADo/@-36.8182051,-73.0040109,17z/data=!4m9!4m8!1m0!1m5!1m1!1s0x9669b4059c66d6fd:0xd377f7259cf75d6!2m2!1d-73.0018222!2d-36.8182051!3e0" target="_blank">Google Map</a> / <a href="https://ul.waze.com/ul?place=EjRDLiBUYXJyYWdvbmEgU3VyIDIxNjIsIENvbmNlcGNpw7NuLCBCw61vIELDrW8sIENoaWxlIjESLwoUChIJ_dZmnAW0aZYRIFlZrgI9ItMQ8hAqFAoSCUvDLVYFtGmWEcX9ABeYAKMc&ll=-36.81820510%2C-73.00182220&navigate=yes&utm_campaign=waze_website&utm_source=waze_website&utm_medium=lm_share_location" target="_blank">Waze</a>
+    <br /><i class="material-icons">schedule</i> <b>Hora de llegada: 15:00</b>
+    <br /><i class="material-icons">schedule</i> <b>Hora de término: 17:30</b> 
+    <br /><i>Debe presentar pase de movilidad.</i>
+  </div>
+</body>
+<script>
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      videoId: 'on-0hN_rYQo',
+      playerVars: {
+        autoplay: 1,
+        controls: 0,
+        modestbranding: 1,
+        loop: 1,
+        start: 0,
+        playlist: 'on-0hN_rYQo'
+      }
+    });
+  }
+</script>
+</html>
