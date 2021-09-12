@@ -7,11 +7,13 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <style>
           .bg-video {
-            position: fixed;
+            /*position: fixed;*/
             top: 0;
             left: 0;
-            width: 100vw;
+            /*width: 100vw;
             height: 100vh;
+            */
+            height: auto;
             overflow: hidden;
             z-index: -1;
           }
@@ -20,17 +22,20 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
+            /*width: 100vw;
             height: 100vh;
+            */
             z-index: -2;
+            height: 100%;
           }
 
           .bg-video .overlay {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100vw;
+            /*width: 100vw;
             height: 100vh;
+            */
             z-index: 0;
           }
           h1 {
@@ -66,19 +71,22 @@
   </div>
 
   <h1>CUMPLEAÑOS DE CLEMENTE</h1>
-  <div class="info-cumple">Este sábado 25 de septiembre, estas invitado al cumpleaños de Clemente
+  <div class="info-cumple">Este sábado 25 de septiembre, estas invitado al cumpleaños de Clemente.
     <br />
     <br /><i class="material-icons">location_on</i> <b>Donde:</b> Tarragona Sur 2162, Valle Noble. Concepción.
     <br /><i class="material-icons">drive_eta</i> <a href="https://www.google.com/maps/dir//C.+Tarragona+Sur+2162,+Concepci%C3%B3n,+B%C3%ADo+B%C3%ADo/@-36.8182051,-73.0040109,17z/data=!4m9!4m8!1m0!1m5!1m1!1s0x9669b4059c66d6fd:0xd377f7259cf75d6!2m2!1d-73.0018222!2d-36.8182051!3e0" target="_blank">Google Map</a> / <a href="https://ul.waze.com/ul?place=EjRDLiBUYXJyYWdvbmEgU3VyIDIxNjIsIENvbmNlcGNpw7NuLCBCw61vIELDrW8sIENoaWxlIjESLwoUChIJ_dZmnAW0aZYRIFlZrgI9ItMQ8hAqFAoSCUvDLVYFtGmWEcX9ABeYAKMc&ll=-36.81820510%2C-73.00182220&navigate=yes&utm_campaign=waze_website&utm_source=waze_website&utm_medium=lm_share_location" target="_blank">Waze</a>
     <br /><i class="material-icons">schedule</i> <b>Hora de llegada: 15:00</b>
     <br /><i class="material-icons">schedule</i> <b>Hora de término: 17:30</b> 
     <br /><i>Debe presentar pase de movilidad.</i>
+    <br /><br />
+    <i class="material-icons" onclick="activaSonido()" style="font-size: 56px;">volume_up</i>
   </div>
 </body>
 
 <script>
   // 2. This code loads the IFrame Player API code asynchronously.
   var tag = document.createElement('script');
+  var sonido=0;
 
   tag.src = "https://www.youtube.com/iframe_api";
   var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -91,7 +99,7 @@
     player = new YT.Player('player', {
       width: '100%',
       videoId: 'on-0hN_rYQo',
-      playerVars: { 'autoplay': 1, 'playsinline': 1 },
+      playerVars: { 'autoplay': 1, 'playsinline': 1, 'controls': 0 },
       events: {
         'onReady': onPlayerReady
       }
@@ -100,8 +108,21 @@
 
   // 4. The API will call this function when the video player is ready.
   function onPlayerReady(event) {
-     event.target.mute();
+    event.target.mute();
     event.target.playVideo();
   }
+
+  function activaSonido(event) {
+    sonido++;
+    if(sonido==1)
+      {
+        player.unMute();
+      }
+    else
+      {
+        player.mute();
+        sonido=0;
+      }
+    }
 </script>
 </html>
