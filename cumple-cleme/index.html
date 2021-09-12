@@ -62,6 +62,14 @@
           .material-icons {
             color:chartreuse;
           }
+          .blink_me {
+            animation: blinker 3s linear infinite;
+          }
+          @keyframes blinker {
+            50% {
+              opacity: 0;
+            }
+          }
         </style>
         <title>Cumple Clemente</title>
 </head>
@@ -69,7 +77,6 @@
   <div class="bg-video">
     <div id="player"></div>
   </div>
-
   <h1>CUMPLEAÑOS DE CLEMENTE</h1>
   <div class="info-cumple">Este sábado 25 de septiembre, estas invitado al cumpleaños de Clemente.
     <br />
@@ -79,10 +86,9 @@
     <br /><i class="material-icons">schedule</i> <b>Hora de término: 17:30</b> 
     <br /><i>Debe presentar pase de movilidad.</i>
     <br /><br />
-    <i class="material-icons" onclick="activaSonido()" style="font-size: 56px;">volume_up</i>
+    <i class="material-icons" onclick="activaSonido()" style="font-size: 56px;">volume_up</i><div class="blink_me"> activar sonido</div>
   </div>
 </body>
-
 <script>
   // 2. This code loads the IFrame Player API code asynchronously.
   var tag = document.createElement('script');
