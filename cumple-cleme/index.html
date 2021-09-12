@@ -62,7 +62,6 @@
 </head>
 <body>
   <div class="bg-video">
-    <div class="overlay"></div>
     <div id="player"></div>
   </div>
 
@@ -76,25 +75,33 @@
     <br /><i>Debe presentar pase de movilidad.</i>
   </div>
 </body>
+
 <script>
+  // 2. This code loads the IFrame Player API code asynchronously.
   var tag = document.createElement('script');
+
   tag.src = "https://www.youtube.com/iframe_api";
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+  // 3. This function creates an <iframe> (and YouTube player)
+  //    after the API code downloads.
   var player;
   function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
+      width: '100%',
       videoId: 'on-0hN_rYQo',
-      playerVars: {
-        autoplay: 1,
-        controls: 0,
-        modestbranding: 1,
-        loop: 1,
-        start: 0,
-        playlist: 'on-0hN_rYQo'
+      playerVars: { 'autoplay': 1, 'playsinline': 1 },
+      events: {
+        'onReady': onPlayerReady
       }
     });
+  }
+
+  // 4. The API will call this function when the video player is ready.
+  function onPlayerReady(event) {
+     event.target.mute();
+    event.target.playVideo();
   }
 </script>
 </html>
