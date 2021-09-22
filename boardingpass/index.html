@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<style>
+	body {
+	  background-image: url('background.jpg');
+	  background-repeat: no-repeat;
+	  background-attachment: fixed;  
+	  background-size: cover;
+	}
+	/* Bloque superior **/
+	#nombrePasajero {
+		position: absolute;
+	    top: 27.5%;
+	    left: 7%;
+	    font-weight: normal;
+	    font-size: 16px;
+	}
+	#codigoCheckin {
+		position: absolute;
+	    top: 36%;
+	    right: 9.5%;
+	}
+	#codigoVuelo {
+		position: absolute;
+	    top: 42%;
+	    right: 9.5%;
+	}
+	#fechaVuelo {
+		position: absolute;
+	    top: 48.5%;
+	    right: 9.5%;
+	}
+	/* Bloque medio */
+	/* origen */
+	#origenVuelo{
+		position: fixed;
+	    top: 58%;
+	    left: 6.5%;
+	    font-size: 32px;
+	    width: 20%;
+	    font-weight: normal;
+	    text-transform: uppercase;
+	}
+	#origenVueloCiudad{
+		position: fixed;
+	    top: 63%;
+	    left: 7%;
+	    width: 40%;
+	}
+
+	/* destino */
+	#destinoVuelo{
+		position: fixed;
+	    top: 58%;
+	    right: 1%;
+	    font-size: 32px;
+	    width: 20%;
+	    font-weight: normal;
+	    text-transform: uppercase;
+	}
+	#destinoVueloCiudad{
+		position: fixed;
+	    top: 63%;
+		right: 1.5%;
+	    width: 20%;
+	}
+	/* misc */
+	.inputBoarding {
+		color: #263564;
+	    border: 0px;
+	    font-size: 15px;
+	    font-weight: bold;
+	}
+	#qrcode {
+		position: absolute;
+	    top: 31%;
+	    left: 6%;
+	}
+	</style>
+	<title>Boarding Pass</title>
+	<script src="./qrcode.js"></script>
+	<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+</head>
+<body>
+	<input type="text" class="inputBoarding" id="nombrePasajero" placeholder="Nombre Apellido" />
+	<input type="text" class="inputBoarding" id="codigoCheckin" placeholder="TAGIJE" />
+	<input type="text" class="inputBoarding" id="codigoVuelo" placeholder="LA102" />
+	<input type="text" class="inputBoarding" id="fechaVuelo" placeholder="MIÉ 21 JUL 2021" />
+
+	<input type="text" class="inputBoarding" id="origenVuelo" placeholder="CCP" />
+	<input type="text" class="inputBoarding" id="origenVueloCiudad" placeholder="Concepción" />
+	<input type="text" class="inputBoarding" id="horaDespegue" placeholder="12:24 PM" />
+
+	<input type="text" class="inputBoarding" id="destinoVuelo" placeholder="SCL" />
+	<input type="text" class="inputBoarding" id="destinoVueloCiudad" placeholder="Santiago" />
+	<input type="text" class="inputBoarding" id="horaLlegada" placeholder="01:32 PM" />
+
+	<div id="qrcode"></div>
+
+	<script stype="text/Javascript">
+	$('.inputBoarding').on('change', function(){
+	  // Clear Previous QR Code
+	  $('#qrcode').empty();
+	  // Generate and Output QR Code
+	  var qrcode = new QRCode({
+	    content: "M1"+$('#nombrePasajero').val().toUpperCase()+" "+$('#codigoCheckin').val().toUpperCase()+" "+$('#origenVuelo').val().toUpperCase()+$('#destinoVuelo').val().toUpperCase()+$('#codigoVuelo').val().toUpperCase()+ " 202Y019D0008 147>5181WW1199BJA 0000000000000290000000000000 0",
+	    padding: 4,
+	    width: 170,
+	    height: 170,
+	    color: "#000000",
+	    background: "#ffffff",
+	    ecl: "M",
+	  });
+
+	  var svg = qrcode.svg();
+	  document.getElementById("qrcode").innerHTML = svg;
+	});
+	</script>
+</body>
+</html>
