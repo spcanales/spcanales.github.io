@@ -167,7 +167,7 @@
 	  $('#qrcode').empty();
 	  // Generate and Output QR Code
 	  var qrcode = new QRCode({
-	    content: "M1"+$('#nombrePasajero').val().toUpperCase()+" "+$('#codigoCheckin').val().toUpperCase()+" "+$('#origenVuelo').val().toUpperCase()+$('#destinoVuelo').val().toUpperCase()+$('#codigoVuelo').val().toUpperCase()+ " 202Y019D0008 147>5181WW1199BJA 0000000000000290000000000000 0",
+	    content: "M1"+$('#nombrePasajero').val().toUpperCase()+" "+$('#codigoCheckin').val().toUpperCase()+" "+$('#origenVuelo').val().toUpperCase()+$('#destinoVuelo').val().toUpperCase()+$('#codigoVuelo').val().toUpperCase()+ " 202Y0"+$('#asientoNumero').val().toUpperCase()+"000"+$('#seqNumero').val()+" 147>5181WW1199BJA 0000000000000290000000000000 0",
 	    padding: 4,
 	    width: 170,
 	    height: 170,
@@ -180,8 +180,6 @@
 	  document.getElementById("qrcode").innerHTML = svg;
 	});
 
-
-                    //$(this).next(".inputBoarding").focus();
 	$('body').on('keydown', 'input, select', function(e) {
 	  if (e.which === 13) {
 	  		$(this).next(".inputBoarding").focus();
