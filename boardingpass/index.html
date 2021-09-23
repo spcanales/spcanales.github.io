@@ -9,27 +9,29 @@
 	  background-repeat: no-repeat;
 	  background-attachment: fixed;  
 	  background-size: cover;
+	  width: 414px;
+	  height: 896px;
 	}
 	/* Bloque superior **/
 	#nombrePasajero {
-		position: absolute;
+		position: fixed;
 	    top: 27.5%;
 	    left: 7%;
 	    font-weight: normal;
 	    font-size: 16px;
 	}
 	#codigoCheckin {
-		position: absolute;
+		position: fixed;
 	    top: 36%;
 	    right: 9.5%;
 	}
 	#codigoVuelo {
-		position: absolute;
+		position: fixed;
 	    top: 42%;
 	    right: 9.5%;
 	}
 	#fechaVuelo {
-		position: absolute;
+		position: fixed;
 	    top: 48.5%;
 	    right: 9.5%;
 	}
@@ -50,6 +52,12 @@
 	    left: 7%;
 	    width: 40%;
 	}
+	#horaDespegue{
+		position: fixed;
+	    top: 67%;
+	    left: 7%;
+	    width: 40%;
+	}
 
 	/* destino */
 	#destinoVuelo{
@@ -67,15 +75,23 @@
 		right: 1.5%;
 	    width: 20%;
 	}
+	#horaLlegada{
+		position: fixed;
+	    top: 67%;
+	    right: 1.5%;
+	    width: 20%;
+	}
+
 	/* misc */
 	.inputBoarding {
 		color: #263564;
 	    border: 0px;
 	    font-size: 15px;
 	    font-weight: bold;
+	    display: inline;
 	}
 	#qrcode {
-		position: absolute;
+		position: fixed;
 	    top: 31%;
 	    left: 6%;
 	}
