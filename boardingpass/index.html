@@ -152,7 +152,12 @@
 
 
                     //$(this).next(".inputBoarding").focus();
-
+	$('body').on('keydown', 'input, select', function(e) {
+	  if (e.which === 13) {
+	  		$(this).next(".inputBoarding").focus();
+	    return false;
+	  }
+	});
 	</script>
 </body>
 </html>
