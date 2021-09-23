@@ -105,6 +105,19 @@
 	    width: 30%;
 	    text-transform: uppercase;
 	}
+	#seqNumero{
+		position: inherit;
+	    top: 70%;
+	    left: 10.2%;
+	    width: 30%;
+	}
+	#asientoNumero{
+		position: inherit;
+	    top: 70%;
+	    left: 20.2%;
+	    width: 30%;
+	    text-transform: uppercase;	
+	}
 
 	/* misc */
 	.inputBoarding {
@@ -145,7 +158,8 @@
 		<input type="text" class="inputBoarding" id="horaLlegada" placeholder="01:32 PM" maxlength="8" />
 		
 		<input type="text" class="inputBoarding" id="horaEmbarque" placeholder="11:34 AM" maxlength="8" />
-		
+		<input type="text" class="inputBoarding" id="seqNumero" placeholder="8" maxlength="2" />
+		<input type="text" class="inputBoarding" id="asientoNumero" placeholder="19 D" maxlength="3" />
 	</div>
 	<script stype="text/Javascript">
 	$('.inputBoarding').on('change', function(){
