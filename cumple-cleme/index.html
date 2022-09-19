@@ -127,7 +127,11 @@
     if(sonido==1)
       {
         player.unMute();
-        player.playVideo();
+        try {
+        	player.playVideo();
+        } catch (error) {
+			console.error(error);
+		}
       }
     else
       {
