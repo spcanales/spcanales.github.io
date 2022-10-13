@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<style>
+	body {
+		background-image: url('background.png');
+		background-repeat: no-repeat;
+		background-attachment: absolute;  
+		background-size: cover;
+		max-width: 414px !important;
+	    max-height: 736px !important;
+	}
+	#contenido{
+		width: 414px !important;
+		height: 736px !important;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+	}
+	/* Bloque superior **/
+	#nombrePasajero {
+		position: inherit;
+	    top: 10.2%;
+	    left: 5.5%;
+	    font-weight: normal;
+	    font-size: 16px;
+	    text-transform: capitalize;
+	}
+	#codigoCheckin {
+		position: inherit;
+	    top: 20.6%;
+	    right: 9.4%;
+	    text-transform: uppercase;
+	}
+	#codigoVuelo {
+		position: inherit;
+	    top: 27.9%;
+	    right: 9.4%;
+	    text-transform: uppercase;
+	}
+	#fechaVuelo {
+		position: inherit;
+	    top: 35.5%;
+	    right: 9.4%;
+	    text-transform: uppercase;
+	}
+	/* Bloque medio */
+	/* origen */
+	#origenVuelo{
+		position: inherit;
+	    top: 40.9%;
+	    left: 4.6%;
+	    font-size: 43px;
+	    width: 30%;
+	    font-weight: normal;
+	    text-transform: uppercase;
+	}
+	#origenVueloCiudad{
+		position: inherit;
+	    top: 47.1%;
+	    left: 5.9%;
+	    width: 30%;
+	    font-size: 16px;
+	    text-transform: capitalize;
+	    font-weight: 200;
+	}
+	#origenAeropuerto{
+		position: inherit;
+	    top: 50%;
+	    left: 5.9%;
+	    width: 30%;
+	    font-size: 10px;
+	    text-transform: capitalize;
+	    font-weight: 200;	
+	}
+	#destinoAeropuerto{
+		position: inherit;
+	    top: 50%;
+	    right: -0.2%;
+	    width: 30%;
+	    font-size: 10px;
+	    text-transform: capitalize;
+	    font-weight: 200;	
+	}
+	#destinoVueloCiudad{
+		position: inherit;
+	    top: 47.1%;
+		right: 5.4%;
+	    width: 30%;
+	    text-align: right;
+	    font-size: 16px;
+	    text-transform: capitalize;
+	    font-weight: 200;
+	}
+	#horaDespegue{
+		position: inherit;
+	    top: 51.6%;
+	    left: 5.9%;
+	    width: 30%;
+	    text-transform: uppercase;
+	}
+
+	/* destino */
+	#destinoVuelo{
+		position: inherit;
+	    top: 40.9%;
+	    right: -4.5%;
+	    font-size: 43px;
+	    width: 30%;
+	    font-weight: normal;
+	    text-transform: uppercase;
+	}
+	#horaLlegada{
+		position: inherit;
+	    top: 51.6%;
+	    right: -2.1%;
+	    width: 20%;
+	    text-transform: uppercase;
+	}
+
+	/* footer */
+	#horaEmbarque{
+		position: inherit;
+	    top: 66.5%;
+	    left: 13%;
+	    width: 10%;
+	    text-transform: uppercase;
+	    font-size: 13px !important;
+	}
+	#asientoNumero{
+		position: inherit;
+	    top: 66.5%;
+	    left: 48%;
+	    width: 10%;
+	    text-transform: uppercase;
+	    font-size: 13px !important;	
+	}
+	#seqNumero{
+		position: inherit;
+	    top: 66.5%;
+	    left: 71%;
+	    width: 10%;
+	    font-size: 13px !important;
+	}
+	#zonaNumero{
+		position: inherit;
+	    top: 66.5%;
+	    left: 83.3%;
+	    width: 10%;
+	    font-size: 13px !important;
+	}
+
+	/* misc */
+	.inputBoarding {
+		color: #263564;
+	    border: 0px;
+	    font-size: 20px;
+	    font-weight: bold;
+	    display: inline;
+	    width:40%;
+	    background: #0000;
+	    font-weight: 200;
+	}
+	#qrcode {
+		position: relative;
+	    top: 16.7%;
+	    left: 6%;
+	    width: 30%
+	}
+	</style>
+	<title>Boarding Pass</title>
+	<script src="./qrcode.js"></script>
+	<script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+</head>
+<body>
+	<div id="contenido">
+		<div id="qrcode"></div>
+
+		<input type="text" class="inputBoarding" id="nombrePasajero" placeholder="Nombre Apellido" />
+		<input type="text" class="inputBoarding" id="codigoCheckin" placeholder="TAGIJE" maxlength="6"/>
+		<input type="text" class="inputBoarding" id="codigoVuelo" placeholder="JA 102" maxlength="7" />
+		<input type="text" class="inputBoarding" id="fechaVuelo" placeholder="MIÉ 21 OCT, 2022" maxlength="16" />
+
+		<input type="text" class="inputBoarding" id="origenVuelo" placeholder="SCL" maxlength="3"/>
+		<input type="text" class="inputBoarding" id="origenVueloCiudad" placeholder="Santiago" />
+		<input type="text" class="inputBoarding" id="origenAeropuerto" placeholder="Aeropuerto Carriel Sur" />
+		<input type="text" class="inputBoarding" id="horaDespegue" placeholder="12:24" maxlength="8"/>
+
+		<input type="text" class="inputBoarding" id="destinoVuelo" placeholder="CPP" maxlength="3"/>
+		<input type="text" class="inputBoarding" id="destinoVueloCiudad" placeholder="Concepción" />
+		<input type="text" class="inputBoarding" id="destinoAeropuerto" placeholder="Arturo Merino Benitez" />
+		<input type="text" class="inputBoarding" id="horaLlegada" placeholder="13:32" maxlength="8" />
+		
+		<input type="text" class="inputBoarding" id="horaEmbarque" placeholder="11:34" maxlength="8" />
+		<input type="text" class="inputBoarding" id="seqNumero" placeholder="8" maxlength="2" />
+		<input type="text" class="inputBoarding" id="asientoNumero" placeholder="19D" maxlength="4" />
+		<input type="text" class="inputBoarding" id="zonaNumero" placeholder="3" maxlength="2" />
+	</div>
+	<script stype="text/Javascript">
+	$('.inputBoarding').on('change', function(){
+	  // Clear Previous QR Code
+	  $('#qrcode').empty();
+	  // Generate and Output QR Code
+	  var qrcode = new QRCode({
+	    content: "M1"+$('#nombrePasajero').val().toUpperCase()+" "+$('#codigoCheckin').val().toUpperCase()+" "+$('#origenVuelo').val().toUpperCase()+$('#destinoVuelo').val().toUpperCase()+$('#codigoVuelo').val().toUpperCase()+ " 202Y0"+$('#asientoNumero').val().toUpperCase()+"000"+$('#seqNumero').val()+" 147>5181WW1199BJA 0000000000000290000000000000 0",
+	    padding: 0,
+	    width: 160,
+	    height: 160,
+	    color: "#000000",
+	    background: "#ffffff",
+	    ecl: "M",
+	  });
+
+	  var svg = qrcode.svg();
+	  document.getElementById("qrcode").innerHTML = svg;
+	});
+
+	$('body').on('keydown', 'input, select', function(e) {
+	  if (e.which === 13) {
+	  		$(this).next(".inputBoarding").focus();
+	    return false;
+	  }
+	});
+	</script>
+</body>
+</html>
