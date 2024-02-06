@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartas</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+    body {
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsHAya7N0d6DyVUjFZED53WbIsK9HgbjlPMEhqJcyT-A&s');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    form {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px auto;
+        max-width: 400px;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .resultado {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        margin: 20px auto;
+        max-width: 400px;
+    }
+</style>
+</head>
+<body>
+
+<form id="cipherForm">
+    <label for="inputTextCifrar">Texto a cifrar:</label>
+    <input type="text" id="inputTextCifrar" name="inputTextCifrar">
+    <button type="button" id="cifrarButton">Cifrar</button><br><br>
+    <label for="inputTextDescifrar">Texto a descifrar:</label>
+    <input type="text" id="inputTextDescifrar" name="inputTextDescifrar">
+    <button type="button" id="descifrarButton">Descifrar</button>
+</form>
+
+<div id="resultadoCifrado" class="resultado"></div>
+<div id="resultadoDescifrado" class="resultado"></div>
+
+<script>
+$(document).ready(function(){
+    // Función para cifrar el texto
+    function cifrarTexto(texto) {
+        var resultado = '';
+        for (var i = 0; i < texto.length; i++) {
+            var caracter = texto.charAt(i).toUpperCase(); // Convertir a mayúsculas
+            switch (caracter) {
+                case 'M':
+                    resultado += '0';
+                    break;
+                case 'U':
+                    resultado += '1';
+                    break;
+                case 'R':
+                    resultado += '2';
+                    break;
+                case 'C':
+                    resultado += '3';
+                    break;
+                case 'I':
+                    resultado += '4';
+                    break;
+                case 'E':
+                    resultado += '5';
+                    break;
+                case 'L':
+                    resultado += '6';
+                    break;
+                case 'A':
+                    resultado += '7';
+                    break;
+                case 'G':
+                    resultado += '8';
+                    break;
+                case 'O':
+                    resultado += '9';
+                    break;
+                default:
+                    resultado += caracter;
+            }
+        }
+        return resultado;
+    }
+
+    // Función para descifrar el texto
+    function descifrarTexto(texto) {
+        var resultado = '';
+        for (var i = 0; i < texto.length; i++) {
+            var caracter = texto.charAt(i);
+            if ($.isNumeric(caracter)) {
+                switch (caracter) {
+                    case '0':
+                        resultado += 'M';
+                        break;
+                    case '1':
+                        resultado += 'U';
+                        break;
+                    case '2':
+                        resultado += 'R';
+                        break;
+                    case '3':
+                        resultado += 'C';
+                        break;
+                    case '4':
+                        resultado += 'I';
+                        break;
+                    case '5':
+                        resultado += 'E';
+                        break;
+                    case '6':
+                        resultado += 'L';
+                        break;
+                    case '7':
+                        resultado += 'A';
+                        break;
+                    case '8':
+                        resultado += 'G';
+                        break;
+                    case '9':
+                        resultado += 'O';
+                        break;
+                }
+            } else {
+                resultado += caracter;
+            }
+        }
+        return resultado;
+    }
+
+    // Evento click para cifrar el texto ingresado
+    $('#cifrarButton').click(function(){
+        var texto = $('#inputTextCifrar').val();
+        var textoCifrado = cifrarTexto(texto);
+        $('#resultadoCifrado').text('Texto cifrado: ' + textoCifrado);
+    });
+
+    // Evento click para descifrar el texto ingresado
+    $('#descifrarButton').click(function(){
+        var texto = $('#inputTextDescifrar').val();
+        var textoDescifrado = descifrarTexto(texto);
+        $('#resultadoDescifrado').text('Texto descifrado: ' + textoDescifrado);
+    });
+});
+</script>
+
+</body>
+</html>
