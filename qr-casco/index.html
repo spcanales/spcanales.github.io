@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de QR para Cascos - Chile</title>
+  <meta name="description" content="Generador de códigos QR para certificación de cascos en Chile según la Normativa de acreditación del casco: Decreto Supremo N° 231, de 2000">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+    
+    .container {
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.50);
+    }
+    
+    label {
+      font-weight: bold;
+    }
+    
+    a {
+      color: #2196F3;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    
+    .boton {
+      text-align: right;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: help;
+    }
+    
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 10px;
+      position: absolute;
+      z-index: 1;
+      top: 100%;
+      left: 50%;
+      margin-left: -100px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    canvas {
+      display: block!important
+    }
+
+    #codigo_qr {
+      text-align: center;
+    }
+
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    // Función para generar el código QR
+    function generarCodigoQR(texto) {
+      var qr = new QRCode(document.createElement('div'), {
+        text: texto,
+        width: 276,
+        height: 270,
+      });
+      return qr;
+    }
+
+    // Función para combinar la imagen y el código QR y guardarla como una imagen
+    function combinarImagenYQR() {
+      var codigoAcreditacion = $('#numero_acreditacion').val();
+      var url = 'https://www.mtt.gob.cl/3cvcascos/#/qrcode/' + codigoAcreditacion;
+
+      // Generar el código QR
+      var qr = generarCodigoQR(url);
+
+      // Obtener el canvas del código QR
+      var canvasQR = qr._el.childNodes[0];
+
+      // Obtener la imagen de sello
+      var imagenSello = new Image();
+      imagenSello.src = 'sello.png'; // Ruta de tu imagen de sello
+      imagenSello.crossOrigin = 'anonymous'; // Para permitir el uso de imágenes de dominios diferentes (si es necesario)
+
+      // Una vez que la imagen de sello se haya cargado, combinarla con el código QR
+      imagenSello.onload = function() {
+        // Crear un lienzo para combinar la imagen de sello y el código QR
+        var canvasCombinado = document.createElement('canvas');
+        canvasCombinado.width = 600;
+        canvasCombinado.height = 600; // Ajuste para el número de acreditación
+        var ctx = canvasCombinado.getContext('2d');
+
+        // Calcular la posición para centrar verticalmente el código QR sobre la imagen de sello
+        var qrX = (canvasCombinado.width - canvasQR.width + 7) / 2;
+        var qrY = (canvasCombinado.height - 325) / 2;
+
+        // Dibujar la imagen de sello en el lienzo
+        ctx.drawImage(imagenSello, 0, 0);
+
+        // Dibujar el código QR en el lienzo (superpuesto y centrado sobre la imagen de sello)
+        ctx.drawImage(canvasQR, qrX, qrY);
+
+        // Agregar el número de acreditación debajo del código QR
+        ctx.font = '19px Arial'; // Establecer el tamaño y la fuente del texto
+        ctx.fillStyle = '#000'; // Establecer el color del texto
+        ctx.fillText(codigoAcreditacion, 170, imagenSello.height + canvasQR.height - 400); // Coordenadas fijas para el texto
+
+        // Convertir el lienzo combinado a una imagen PNG
+        var imagenCombinada = canvasCombinado.toDataURL('image/png');
+
+        // Mostrar la imagen combinada en el div
+        $('#codigo_qr').html('<img src="' + imagenCombinada + '" alt="Imagen combinada">');
+      };
+    }
+
+
+    // Generar la imagen combinada al hacer clic en el botón
+    $('#enviar_formulario').on('click', function() {
+      combinarImagenYQR();
+    });
+
+        // Evitar el envío del formulario al presionar Enter en el campo de entrada
+    $('#numero_acreditacion').on('keydown', function(event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        return false;
+      }
+    });
+    
+  });
+</script>
+
+</head>
+<body>
+
+<div class="main">
+  <div class="container">
+    <h2>Generador de QR para cascos certificados</h2>
+    <form action="#" method="POST" id="formulario_generador">
+      <div class="form-group">
+        <label for="numero_acreditacion">Número de Acreditación</label>
+        <div class="tooltip">
+          <input type="text" id="numero_acreditacion" name="numero_acreditacion" placeholder="3CV-ACM-SO-GAR-2019-008" autocomplete="off">
+          <span class="tooltiptext">Puedes obtener este número desde el siguiente sitio buscando por la marca y modelo de tu casco <a href="https://www.conaset.cl/cascos-acreditados/" target="_blank">aquí</a>.</span>
+        </div>
+      </div>
+      
+      <p class="boton"><button type="button" id="enviar_formulario">Generar QR</button></p>
+    </form>
+  </div>
+
+  <div id="codigo_qr" style="margin-top: 20px;"></div>
+</div>
+
+</body>
+</html>
